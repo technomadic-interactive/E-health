@@ -1,0 +1,55 @@
+<?php
+       session_start();
+       // $_SESSION['nombre']=$_POST["Nombre"];
+       // $_SESSION['apellido']=$_POST["Apellido"];
+       // $_SESSION['IMEI']=$_POST["IMEI"];
+       // $_SESSION['direccion']=$_POST["Direccion"];
+       // $_SESSION['year']=$_POST["Year"];
+       // $_SESSION['month']=$_POST["Month"];
+       // $_SESSION['day']=$_POST["Day"];
+       // $_SESSION['telefono']=$_POST["Telefono"];
+       // $_SESSION['sexo']=$_POST["Sexo"];
+       // $_SESSION['latitud']=$_POST["Latitud"];
+       // $_SESSION['longitud']=$_POST["Longitud"];
+       // $_SESSION['fix']=$_POST["Fix"];
+       // $_SESSION['contacto1']=$_POST["Contacto1"];
+       // $_SESSION['numero1']=$_POST["Numero1"];
+       // $_SESSION['contacto2']=$_POST["Contacto2"];
+       // $_SESSION['numero2']=$_POST["Numero2"];
+       // $_SESSION['contacto3']=$_POST["Contacto3"];
+       // $_SESSION['numero3']=$_POST["Numero3"];
+       // $_SESSION['contacto4']=$_POST["Contacto4"];
+       // $_SESSION['numero4']=$_POST["Numero4"];
+       // $_SESSION['contacto5']=$_POST["Contacto5"];
+       // $_SESSION['numero5']=$_POST["Numero5"];
+
+       echo $_SESSION['Nombre'];
+       echo '\n';
+       echo $_SESSION['apellido'];
+       echo '\n';
+       echo $_SESSION['IMEI'];
+       echo '\n';
+       echo $_SESSION['direccion'];
+       echo '\n';
+       echo $_SESSION['year'];
+       echo '\n';
+       echo $_SESSION['month'];
+       echo '\n';
+       echo $_SESSION['day'];
+       echo '\n';
+       echo $_SESSION['telefono'];
+       echo '\n';
+       echo $_SESSION['sexo'];
+       echo '\n';
+       echo $_SESSION['latitud'];
+       echo '\n';
+       echo $_SESSION['longitud'];
+       echo '\n';
+       echo $_SESSION['fix'];
+       echo '\n';
+       echo $_SESSION['contacto1'];
+       echo '\n';
+       echo $_SESSION['numero1'];
+
+       //header("Location: /E-health/html/contactos.php");
+?>
