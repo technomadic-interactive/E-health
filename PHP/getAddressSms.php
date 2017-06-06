@@ -4,17 +4,17 @@ require('plivo-curl-wrapper.php');
 
 #comprueba si viene post
 if($_POST){
-    $latitud = $_POST['Latitud'];
-    $longitud = $_POST['Longitud'];
+    //$latitud = $_POST['Latitud'];
+    //$longitud = $_POST['Longitud'];
+    $latitud = 19.4812;
+    $longitud =-99.234;
     echo "viene post";
-    //echo   $lat=19.4812;
-    //echo   $long=-99.234;
+    echo   $lat=19.4812;
+    echo   $long=-99.234;
     $lat=(string) $latitud;
     $long=(string) $longitud;
 }
 else{
-    $lat="19.4812";
-    $long = "-99.234";
     echo "no viene post";
 }
 
@@ -52,8 +52,6 @@ $curlData_address = curl_exec($curl_address);
 curl_close($curl_address);
 $address = json_decode($curlData_address,true);
 
-//print_r($address);
-//echo $address;
 $myAddress = $address['results'][1]['formatted_address'];#obtiene la direccion
 $myAddress_short = $address_short['id'];#obtiene el short-link
 //echo $myAddress;
@@ -62,9 +60,7 @@ print_r($myAddress);
 #elimina los espacios despues de las comas
 $search=array(", ",",Méx",".,Mexico");
 $replace=array(",","","");
-//$myFixedAddress=str_replace($search,$replace,$myAddress);
-//echo "####".$myFixedAddress;
-#print_r($address);
+
 
 $destNumb="+525554181711";
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
