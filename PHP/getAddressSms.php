@@ -57,7 +57,7 @@ $address = json_decode($curlData_address,true);
 $myAddress = $address['results'][0]['formatted_address'];#obtiene la direccion
 $myAddress_short = $address_short['id'];#obtiene el short-link
 //echo $myAddress;
-//var_dump($myAddress);
+var_dump($myAddress);
 //print_r($myAddress);
 #elimina los espacios despues de las comas
 $search=array(", ",",Méx",".,Mexico");
