@@ -20,8 +20,18 @@ session_start();
 // }
 
 $IMEI=$_SESSION["IMEI"];
+$latitud=$_SESSION["latitud"];
+$longitud=$_SESSION["longitud"];
+$fix=$_SESSION["fix"];
+printf("\n");
+echo $IMEI;
 printf("\n");
 echo $latitud;
+printf("\n");
+echo $longitud;
+printf("\n");
+echo $fix;
+
 printf("\n");
 
 $url1 = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";#url para servicio de convertir coordenadas a direccion

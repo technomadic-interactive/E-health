@@ -27,7 +27,9 @@
        $contacto5=$_POST["Contacto5"];
        $numero5=$_POST["Numero5"];
        $_SESSION['IMEI']=$IMEI;
-       $_SESSION['IMEI']=$nombre;
+       $_SESSION['latitud']=$latitud;
+       $_SESSION['longitud']=$longitud;
+       $_SESSION['fix']=$fix;
        if ($nombre){
            $peticion="INSERT INTO datos VALUES (NULL, '" .$IMEI."', '" .$nombre."', '" .$apellido."',$year, $month, $day, '" .$direccion."','" .$telefono."', '" .$sexo."' )";        
            header("Location: /E-health/PHP/monitoreo.php");
