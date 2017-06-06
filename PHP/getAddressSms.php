@@ -3,34 +3,11 @@ require('plivo-curl-wrapper.php');
 session_start();
 #$api_key="AIzaSyDqnw9lpFlOPzK0Ds5XDlsNVMTYRrbQkZI";#key para google short-link
 
-#comprueba si viene post
-// if($_POST){
-//     //$latitud = $_POST['Latitud'];
-//     //$longitud = $_POST['Longitud'];
-//     $latitud = 19.4812;
-//     $longitud =-99.234;
-//     echo "viene post";
-//     echo   $lat=19.4812;
-//     echo   $long=-99.234;
-//     $lat=(string) $latitud;
-//     $long=(string) $longitud;
-// }
-// else{
-//     echo "no viene post";
-// }
-
 $IMEI=$_SESSION["IMEI"];
 $latitud=$_SESSION["latitud"];
 $longitud=$_SESSION["longitud"];
 $fix=$_SESSION["fix"];
-printf("\n");
-echo $IMEI;
-printf("\n");
-echo $latitud;
-printf("\n");
-echo $longitud;
-printf("\n");
-echo $fix;
+
 
 $lat=(string) $latitud;
 $long=(string) $longitud;
