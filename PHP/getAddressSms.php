@@ -3,20 +3,20 @@ require('plivo-curl-wrapper.php');
 #$api_key="AIzaSyDqnw9lpFlOPzK0Ds5XDlsNVMTYRrbQkZI";#key para google short-link
 
 #comprueba si viene post
-// if($_POST){
-//     $latitud = $_POST['lat'];
-//     $longitud = $_POST['long'];
-//     echo "viene post";
-//     echo   $lat=19.4812;
-//     echo   $long=-99.234;
-//     $lat=(string) $latitud;
-//     $long=(string) $longitud;
-// }
-//else{
+if($_POST){
+    $latitud = $_POST['Latitud'];
+    $longitud = $_POST['Longitud'];
+    echo "viene post";
+    //echo   $lat=19.4812;
+    //echo   $long=-99.234;
+    $lat=(string) $latitud;
+    $long=(string) $longitud;
+}
+else{
     $lat="19.4812";
     $long = "-99.234";
     echo "no viene post";
-//}
+}
 
 $url1 = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";#url para servicio de convertir coordenadas a direccion
 
