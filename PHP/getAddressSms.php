@@ -58,7 +58,21 @@ $search=array(", ",",Méx",".,Mexico");
 $replace=array(",","","");
 
 
-$destNumb="+525554181711";
+//$destNumb="+525554181711";
+
+include "../connect_e_health.php";
+$link=db_Connection();
+$result= $link->query("SELECT Numero1 FROM contactos WHERE IMEI=000000000000000");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $res=$row["Numero1"];
+    }
+}
+printf("\n");
+$link->close();
+$destNumb="'".$res."'";
+echo $destNumb;
+
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
 $message=$myAddress."\r\n".$myAddress_short;#mensaje para el sms de plivo
