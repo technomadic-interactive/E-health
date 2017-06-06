@@ -54,7 +54,7 @@ $address = json_decode($curlData_address,true);
 
 //print_r($address);
 //echo $address;
-$myAddress = $address['results'][0]['formatted_address'];#obtiene la direccion
+$myAddress = $address['results'][1]['formatted_address'];#obtiene la direccion
 $myAddress_short = $address_short['id'];#obtiene el short-link
 //echo $myAddress;
 var_dump($myAddress);
