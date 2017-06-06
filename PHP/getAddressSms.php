@@ -58,7 +58,7 @@ $myAddress = $address['results'][1]['formatted_address'];#obtiene la direccion
 $myAddress_short = $address_short['id'];#obtiene el short-link
 //echo $myAddress;
 var_dump($myAddress);
-//print_r($myAddress);
+print_r($myAddress);
 #elimina los espacios despues de las comas
 $search=array(", ",",Méx",".,Mexico");
 $replace=array(",","","");
