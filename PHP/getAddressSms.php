@@ -32,6 +32,9 @@ echo $longitud;
 printf("\n");
 echo $fix;
 
+$lat=(string) $latitud;
+$long=(string) $longitud;
+
 printf("\n");
 
 $url1 = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";#url para servicio de convertir coordenadas a direccion
