@@ -68,8 +68,10 @@ $replace=array(",","","");
 
 $destNumb="+525554181711";
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
-
+printf("\n");
 $message=$myAddress."\r\n".$myAddress_short;#mensaje para el sms de plivo
+echo $message;
+printf("\n");
 
 #envia SMS plivo    
 
