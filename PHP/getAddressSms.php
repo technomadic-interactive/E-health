@@ -62,7 +62,7 @@ $replace=array(",","","");
 
 include "../connect_e_health.php";
 $link=db_Connection();
-$result= $link->query("SELECT Numero1 FROM contactos WHERE IMEI=000000000000000");
+$result= $link->query("SELECT Numero1 FROM contactos WHERE IMEI=".$IMEI."");
 if($result){
     while ($row = $result->fetch_assoc()) {
              $res=$row["Numero1"];
