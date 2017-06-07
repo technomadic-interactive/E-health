@@ -70,7 +70,7 @@ if($result){
 }
 printf("\n");
 $link->close();
-$destNumb="'".$res."'";
+$destNumb=$res;
 echo $destNumb;
 
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
