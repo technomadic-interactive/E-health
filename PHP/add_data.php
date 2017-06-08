@@ -32,11 +32,13 @@
        $_SESSION['fix']=$fix;
        if ($nombre){
            $peticion="INSERT INTO datos VALUES (NULL, '" .$IMEI."', '" .$nombre."', '" .$apellido."',$year, $month, $day, '" .$direccion."','" .$telefono."', '" .$sexo."' )";        
+           $link->query($peticion);
            header("Location: /E-health/PHP/monitoreo.php");
        }
 
       if ($contacto1){
           $peticion2="INSERT INTO contactos VALUES ('" .$IMEI."', '" .$contacto1."', '" .$numero1."', '" .$contacto2."','" .$numero2."', '" .$contacto3."', '" .$numero3."', '" .$contacto4."', '" .$numero4."', '" .$contacto5."', '" .$numero5."' )";
+          $link->query($peticion2);
           header("Location: /E-health/PHP/monitoreo.php"); 
       }
 
@@ -47,8 +49,8 @@
           include "getAddressSms.php";
       }
 
-    $link->query($peticion);
-    $link->query($peticion2);
+    
+    
 
    	$link->close();
 
