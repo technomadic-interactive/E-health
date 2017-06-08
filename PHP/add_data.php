@@ -41,8 +41,9 @@
       }
 
       if ($latitud){
-          $peticion="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."')"; 
+          $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."')"; 
           echo $peticion;
+          $link->query($peticion3);
           include "getAddressSms.php";
       }
 
