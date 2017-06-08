@@ -2,16 +2,7 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 
-
-//Declaracion general de variables Generales
-long previousMillis = 0;
-unsigned long currentMillis = 0;
-int totalSend = 0;
-boolean uConfig = false;
-int gnAct = 0;
-
-int x;
-int actividad=0;
+String imei;
 
 //Generacion de Objetos
 
@@ -22,11 +13,34 @@ void sendMsg();
 void setup() {
   Wire.begin();
   Serial.begin(9600);
+  Uc20.begin(115200);
+  delay(1000);
+  sendATCommand("AT+IPR=9600", 100);
   Uc20.begin(9600);
 
   delay(1000);
   Serial.println("QUC20 inicializado a 115200");
   sessionsInit();
+
+  char c;
+  imei;
+  Uc20.println(" AT+GSN");     // Send request
+  int count = 5;                       // Number of 100ms intervals before 
+                                       // assuming there is no more data
+  while(count-- != 0) {                // Loop until count = 0
+
+    delay(100);                        // Delay 100ms
+
+    while (Uc20.available() > 0){  // If there is data, read it and reset
+       c = (char)Uc20.read();      // the counter, otherwise go try again
+       imei += c;
+       count = 5;       
+    }
+  }
+  imei.remove(0, 9);
+  imei.remove(15, 8);
+  Serial.println(imei);
+  Serial.println(imei.length());
 }
 
 void loop() {
@@ -137,25 +151,14 @@ String getBodyReadResponse(String msg) {
   return msg.substring(startW + 1, endsW);
 }
 
-//Funcion para obtener un campo en particular de una cadena csv
-String parseCSV(String csv, int field) {
-  String sField;
-  int fCom, sCom;
-  for (int i = 0; i < field; i++) {
-    fCom = csv.indexOf(',');
-    sCom = csv.indexOf(',', fCom + 1);
-    sField = csv.substring(fCom + 1, sCom);
-    csv.remove(fCom, sField.length());
-  }
-  return sField;
-}
 
 //Funcion de envio de datos a traves de 3G
 void sendMsg() {
   String act;
   String res, atcomm;
-  res = "latitud=24.345&longitud=12.343";
-  sendATCommandWithResponse("AT+QHTTPURL=78,78", "http://technomadic.westcentralus.cloudapp.azure.com/E-health/PHP/post_data.php");
+  res = "Latitud=24.345&Longitud=12.343&Fix=Ant&IMEI=";
+  res += imei;
+  sendATCommandWithResponse("AT+QHTTPURL=77,77", "http://technomadic.westcentralus.cloudapp.azure.com/E-health/PHP/add_data.php");
   delay(300);
   sendATCommand("AT+QIGETERROR", 100);
   atcomm = "AT+QHTTPPOST=";
