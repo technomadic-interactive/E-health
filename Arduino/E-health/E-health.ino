@@ -216,7 +216,7 @@ void printCalculatedAccels(){
     Serial.print(accel.cz, 3);
     Serial.print("\t");
     Serial.println();
-    getCellGPS(" AT+QCELLLOC", 10);
+    getCellGPS(" AT+QCELLLOC", 100);
     Serial.println(latitud);
     Serial.println(longitud);
     while (conexion<2){
@@ -261,10 +261,10 @@ String getCellGPS(String command, int ms){
   longitud.remove(10, 19);
   latitud.remove(0, 36);
   latitud.remove(9, 8);
-  // Serial.println(longitud);
-  // Serial.println(latitud);
-  // Serial.println("================");
-  // Serial.println("================");
-  // Serial.println("================");
+  Serial.println(longitud);
+  Serial.println(latitud);
+  Serial.println("================");
+  Serial.println("================");
+  Serial.println("================");
   return latitud, longitud;
 }
