@@ -76,12 +76,39 @@ if($result){
     }
 }
 
+$result= $link->query("SELECT Numero3 FROM contactos WHERE IMEI=".$IMEI."");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $res2=$row["Numero3"];
+    }
+}
+$result= $link->query("SELECT Numero4 FROM contactos WHERE IMEI=".$IMEI."");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $res2=$row["Numero4"];
+    }
+}
+
+$result= $link->query("SELECT Numero5 FROM contactos WHERE IMEI=".$IMEI."");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $res2=$row["Numero5"];
+    }
+}
+
+
 printf("\n");
 $link->close();
 $destNumb=$res;
 $destNumb2=$res2;
+$destNumb3=$res3;
+$destNumb4=$res4;
+$destNumb5=$res5;
 echo $destNumb;
 echo $destNumb2;
+echo $destNumb3;
+echo $destNumb4;
+echo $destNumb5;
 
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
@@ -114,4 +141,8 @@ function SendMessage($number, $message)
     }
 SendMessage($destNumb,$message);        
 SendMessage($destNumb2,$message);
+SendMessage($destNumb3,$message);
+SendMessage($destNumb4,$message);
+SendMessage($destNumb5,$message);
+
 ?>
