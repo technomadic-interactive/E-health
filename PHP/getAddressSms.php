@@ -73,33 +73,6 @@ if($result){
     }
 }
 
-// $result= $link->query("SELECT Numero2 FROM contactos WHERE IMEI=".$IMEI."");
-// if($result){
-//     while ($row = $result->fetch_assoc()) {
-//              $res2=$row["Numero2"];
-//     }
-// }
-
-// $result= $link->query("SELECT Numero3 FROM contactos WHERE IMEI=".$IMEI."");
-// if($result){
-//     while ($row = $result->fetch_assoc()) {
-//              $res3=$row["Numero3"];
-//     }
-// }
-// $result= $link->query("SELECT Numero4 FROM contactos WHERE IMEI=".$IMEI."");
-// if($result){
-//     while ($row = $result->fetch_assoc()) {
-//              $res4=$row["Numero4"];
-//     }
-// }
-
-// $result= $link->query("SELECT Numero5 FROM contactos WHERE IMEI=".$IMEI."");
-// if($result){
-//     while ($row = $result->fetch_assoc()) {
-//              $res5=$row["Numero5"];
-//     }
-// }
-
 
 printf("\n");
 $link->close();
