@@ -116,7 +116,7 @@ echo $destNumb5;
 
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
-$message=$myAddress."\r\n".$myAddress_short;#mensaje para el sms de plivo
+$message=$myAddress."\r\n".$myAddress_short."\r\n"."Tu familiar ha tenido un accidente";#mensaje para el sms de plivo
 echo $message;
 printf("\n");
 
