@@ -68,10 +68,20 @@ if($result){
              $res=$row["Numero1"];
     }
 }
+
+$result= $link->query("SELECT Numero2 FROM contactos WHERE IMEI=".$IMEI."");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $res2=$row["Numero2"];
+    }
+}
+
 printf("\n");
 $link->close();
 $destNumb=$res;
+$destNumb2=$res2;
 echo $destNumb;
+echo $destNumb2;
 
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
@@ -103,4 +113,5 @@ function SendMessage($number, $message)
 //        return array_shift(array_values($response)) == "202";
     }
 SendMessage($destNumb,$message);        
+SendMessage($destNumb2,$message);
 ?>
