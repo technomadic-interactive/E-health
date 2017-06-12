@@ -105,9 +105,13 @@ $destNumb3=$res3;
 $destNumb4=$res4;
 $destNumb5=$res5;
 echo $destNumb;
+printf("\n");
 echo $destNumb2;
+printf("\n");
 echo $destNumb3;
+printf("\n");
 echo $destNumb4;
+printf("\n");
 echo $destNumb5;
 
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
