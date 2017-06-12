@@ -6,6 +6,9 @@
 MMA8452Q accel;
 
 String imei;
+String latitud;
+String longitud;
+String post2;
 int conexion=0;
 
 //Generacion de Objetos
@@ -15,6 +18,11 @@ SoftwareSerial Uc20(5,6); //rX, tX
 void sendMsg();
 
 void setup() {
+  pinMode(4, OUTPUT);
+  digitalWrite(4, HIGH);
+  delay(500);
+  digitalWrite(4, LOW);
+  delay(10000);
   Wire.begin();
   Serial.begin(9600);
   Uc20.begin(115200);
@@ -165,16 +173,16 @@ String getBodyReadResponse(String msg) {
 void sendMsg() {
   String act;
   String res, atcomm;
-  res = "Latitud=24.345&Longitud=12.343&Fix=Ant&IMEI=";
+  res = "Latitud=19.596960&Longitud=-99.224907&Fix=Ant&IMEI=";
   res += imei;
   sendATCommandWithResponse("AT+QHTTPURL=77,77", "http://technomadic.westcentralus.cloudapp.azure.com/E-health/PHP/add_data.php");
   delay(300);
   sendATCommand("AT+QIGETERROR", 100);
   atcomm = "AT+QHTTPPOST=";
-  atcomm += res.length();
+  atcomm += post2.length();
   atcomm += ",80,80";
   Serial.println(atcomm);
-  sendATCommandWithResponse(atcomm, res);
+  sendATCommandWithResponse(atcomm, post2);
   delay(30);
   sendATCommand("AT+QIGETERROR", 100);
   delay(20);
@@ -213,14 +221,55 @@ void printCalculatedAccels(){
     Serial.print(accel.cz, 3);
     Serial.print("\t");
     Serial.println();
+    getCellGPS(" AT+QCELLLOC", 100);
+    Serial.println(latitud);
+    Serial.println(longitud);
     while (conexion<2){
+      post2 = "Latitud=";
+      post2 += latitud;
+      post2 += "&Longitud=";
+      post2 += longitud;
+      post2 += "&IMEI=";
+      post2 += imei;
+      post2 += "&Fix=Celular";
+      Serial.println(post2);
+      delay(1000);
       sendMsg();
       delay(100);
       conexion += 1 ;  
     }
     conexion=0;
-    
+    Serial.println(post2);
   }
 }
 
+String getCellGPS(String command, int ms){
+  char d;
+  longitud="";
+  latitud="";
+  Uc20.println(command);     // Send request
+  int cuenta = 5;                       // Number of 100ms intervals before 
+                                       // assuming there is no more data
+  while(cuenta-- != 0) {                // Loop until count = 0
 
+    delay(100);                        // Delay 100ms
+
+    while (Uc20.available() > 0){  // If there is data, read it and reset
+       d = (char)Uc20.read();      // the counter, otherwise go try again
+       longitud += d;
+       latitud += d;
+       cuenta = 5;        
+    }
+    
+  }
+  longitud.remove(0, 25);
+  longitud.remove(10, 19);
+  latitud.remove(0, 36);
+  latitud.remove(9, 8);
+  Serial.println(longitud);
+  Serial.println(latitud);
+  Serial.println("================");
+  Serial.println("================");
+  Serial.println("================");
+  return latitud, longitud;
+}
