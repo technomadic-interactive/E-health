@@ -79,20 +79,20 @@ if($result){
 $result= $link->query("SELECT Numero3 FROM contactos WHERE IMEI=".$IMEI."");
 if($result){
     while ($row = $result->fetch_assoc()) {
-             $res2=$row["Numero3"];
+             $res3=$row["Numero3"];
     }
 }
 $result= $link->query("SELECT Numero4 FROM contactos WHERE IMEI=".$IMEI."");
 if($result){
     while ($row = $result->fetch_assoc()) {
-             $res2=$row["Numero4"];
+             $res4=$row["Numero4"];
     }
 }
 
 $result= $link->query("SELECT Numero5 FROM contactos WHERE IMEI=".$IMEI."");
 if($result){
     while ($row = $result->fetch_assoc()) {
-             $res2=$row["Numero5"];
+             $res5=$row["Numero5"];
     }
 }
 
