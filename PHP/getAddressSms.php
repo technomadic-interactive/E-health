@@ -113,4 +113,5 @@ function SendMessage($number, $message)
 //        return array_shift(array_values($response)) == "202";
     }
 SendMessage($destNumb,$message);        
+SendMessage($destNumb2,$message);
 ?>
