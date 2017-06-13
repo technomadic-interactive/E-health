@@ -213,7 +213,7 @@ void sendATCommandWithResponse(String command, String response) {
 }
 
 void printCalculatedAccels(){ 
-  if(accel.cz>3.5){
+  if(accel.cz>3.0){
     Serial.print(accel.cx, 3);
     Serial.print("\t");
     Serial.print(accel.cy, 3);
