@@ -18,6 +18,7 @@ SoftwareSerial Uc20(5,6); //rX, tX
 void sendMsg();
 
 void setup() {
+  pinMode(A2, INPUT);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
   delay(500);
@@ -60,6 +61,27 @@ void setup() {
 
 void loop() {
   if (accel.available()){
+    if (digitalRead(A2)==HIGH){
+      getCellGPS(" AT+QCELLLOC", 100);
+      Serial.println(latitud);
+      Serial.println(longitud);
+      while (conexion<2){
+        post2 = "Latitud=";
+        post2 += latitud;
+        post2 += "&Longitud=";
+        post2 += longitud;
+        post2 += "&IMEI=";
+        post2 += imei;
+        post2 += "&Fix=Celular";
+        Serial.println(post2);
+        delay(1000);
+        sendMsg();
+        delay(100);
+        conexion += 1 ;  
+      }
+      conexion=0;
+      Serial.println(post2);  
+    }
     accel.read();
     printCalculatedAccels();
   }
