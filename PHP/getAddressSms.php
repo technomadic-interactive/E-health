@@ -74,6 +74,12 @@ if($result){
     }
 }
 
+$result2= $link->query("SELECT Nombre FROM datos WHERE IMEI=".$IMEI."");
+if($result){
+    while ($row = $result->fetch_assoc()) {
+             $nombre=$row["Nombre"];
+    }
+}
 
 echo $status;
 
@@ -97,7 +103,7 @@ echo $destNumb5;
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
 $message=$myAddress."\r\n".$myAddress_short;#mensaje para el sms de plivo
-$message2="Tu familiar ha sido atendido";
+$message2="Tu familiar ".$nombre." ha sido atendido";
 echo $message;
 printf("\n");
 
