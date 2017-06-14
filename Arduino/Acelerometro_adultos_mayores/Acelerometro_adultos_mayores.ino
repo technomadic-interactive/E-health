@@ -36,26 +36,35 @@ void setup() {
   accel.init(SCALE_4G); // Uncomment this out if you'd like
   
   sessionsInit();
+  while(imei==""){
+    char c;
+    imei;
+    Uc20.println(" AT+GSN");     // Send request
+    int count = 5;                       // Number of 100ms intervals before 
+                                         // assuming there is no more data
+    while(count-- != 0) {                // Loop until count = 0
 
-  char c;
-  imei;
-  Uc20.println(" AT+GSN");     // Send request
-  int count = 5;                       // Number of 100ms intervals before 
-                                       // assuming there is no more data
-  while(count-- != 0) {                // Loop until count = 0
+      delay(100);                        // Delay 100ms
 
-    delay(100);                        // Delay 100ms
-
-    while (Uc20.available() > 0){  // If there is data, read it and reset
-       c = (char)Uc20.read();      // the counter, otherwise go try again
-       imei += c;
-       count = 5;       
+      while (Uc20.available() > 0){  // If there is data, read it and reset
+         c = (char)Uc20.read();      // the counter, otherwise go try again
+         imei += c;
+         count = 5;       
+      }
     }
+    imei.remove(0, 9);
+    imei.remove(15, 8);
+    Serial.println(imei);
+    Serial.println(imei.length());
   }
-  imei.remove(0, 9);
-  imei.remove(15, 8);
-  Serial.println(imei);
-  Serial.println(imei.length());
+  while(latitud=="" || longitud=="" || latitud.length()!=9 || longitud.length()!=10){
+    getCellGPS(" AT+QCELLLOC", 100);
+    Serial.println(latitud);
+    Serial.println(latitud);
+    Serial.println(latitud.length());
+    Serial.println(longitud.length());
+  }
+
 }
 
 void loop() {
@@ -221,9 +230,15 @@ void printCalculatedAccels(){
     Serial.print(accel.cz, 3);
     Serial.print("\t");
     Serial.println();
-    getCellGPS(" AT+QCELLLOC", 100);
-    Serial.println(latitud);
-    Serial.println(longitud);
+    //getCellGPS(" AT+QCELLLOC", 100);
+    //Serial.println(latitud);
+    //Serial.println(longitud);
+    while(latitud=="" || longitud==""){
+      getCellGPS(" AT+QCELLLOC", 100);
+      Serial.println(latitud);
+      Serial.println(latitud);
+      
+    }
     while (conexion<2){
       post2 = "Latitud=";
       post2 += latitud;
