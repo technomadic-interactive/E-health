@@ -26,6 +26,8 @@
        $numero4=$_POST["Numero4"];
        $contacto5=$_POST["Contacto5"];
        $numero5=$_POST["Numero5"];
+       $source=$_POST["Source"];
+       $status=$_POST["Status"];
        $_SESSION['IMEI']=$IMEI;
        $_SESSION['latitud']=$latitud;
        $_SESSION['longitud']=$longitud;
@@ -43,7 +45,7 @@
       }
 
       if ($latitud){
-          $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."')"; 
+          $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."', '" .$source."', '" .$status."')"; 
           echo $peticion;
           $link->query($peticion3);
           include "getAddressSms.php";
