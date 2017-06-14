@@ -10,7 +10,6 @@ String latitud;
 String longitud;
 String post2;
 int conexion=0;
-int led = 13;
 
 //Generacion de Objetos
 
@@ -19,7 +18,6 @@ SoftwareSerial Uc20(5,6); //rX, tX
 void sendMsg();
 
 void setup() {
-  pinMode(led, OUTPU);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
   delay(500);
@@ -215,7 +213,7 @@ void sendATCommandWithResponse(String command, String response) {
 }
 
 void printCalculatedAccels(){ 
-  if(accel.cz>3.0){
+  if(accel.cz>3.5){
     Serial.print(accel.cx, 3);
     Serial.print("\t");
     Serial.print(accel.cy, 3);
@@ -223,7 +221,6 @@ void printCalculatedAccels(){
     Serial.print(accel.cz, 3);
     Serial.print("\t");
     Serial.println();
-    digitalWrite(led, HIGH);
     getCellGPS(" AT+QCELLLOC", 100);
     Serial.println(latitud);
     Serial.println(longitud);
@@ -243,7 +240,6 @@ void printCalculatedAccels(){
     }
     conexion=0;
     Serial.println(post2);
-    digitalWrite(led, LOW);
   }
 }
 
