@@ -59,7 +59,7 @@
           include "getAddressSms.php";
       }
     
-
+      echo $status;
    	$link->close();
 
 /*
