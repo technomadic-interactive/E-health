@@ -82,7 +82,7 @@ void loop() {
         Serial.println(latitud);
       }
       while (conexion<2){
-        post2 = "Latitud=";
+        post2 = "Status=Pendiente&Source=Boton&Latitud=";
         post2 += latitud;
         post2 += "&Longitud=";
         post2 += longitud;
