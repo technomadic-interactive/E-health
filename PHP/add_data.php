@@ -45,7 +45,7 @@
           header("Location: /E-health/PHP/monitoreo.php"); 
       }
 
-      if ($latitud && status=='Pendiente'){
+      if ($latitud && $status=='Pendiente'){
           $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."', '" .$source."', '" .$status."')"; 
           echo $peticion;
           $link->query($peticion3);
