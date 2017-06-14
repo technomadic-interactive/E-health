@@ -10,6 +10,8 @@ String latitud;
 String longitud;
 String post2;
 int conexion=0;
+int led1 = 7;
+int led 2 = 8;
 
 //Generacion de Objetos
 
@@ -18,6 +20,9 @@ SoftwareSerial Uc20(5,6); //rX, tX
 void sendMsg();
 
 void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(A2, INPUT);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
   delay(500);
@@ -69,6 +74,31 @@ void setup() {
 
 void loop() {
   if (accel.available()){
+    if (digitalRead(A2)==HIGH){
+      digitalWrite(led1, HIGH);
+      while(latitud=="" || longitud==""){
+        getCellGPS(" AT+QCELLLOC", 100);
+        Serial.println(latitud);
+        Serial.println(latitud);
+      }
+      while (conexion<2){
+        post2 = "Latitud=";
+        post2 += latitud;
+        post2 += "&Longitud=";
+        post2 += longitud;
+        post2 += "&IMEI=";
+        post2 += imei;
+        post2 += "&Fix=Celular";
+        Serial.println(post2);
+        delay(1000);
+        sendMsg();
+        delay(100);
+        conexion += 1 ;  
+      }
+      conexion=0;
+      Serial.println(post2);
+      digitalWrite(led1, LOW);
+    }
     accel.read();
     printCalculatedAccels();
   }
@@ -233,6 +263,7 @@ void printCalculatedAccels(){
     //getCellGPS(" AT+QCELLLOC", 100);
     //Serial.println(latitud);
     //Serial.println(longitud);
+    digitalWrite(led2, HIGH);
     while(latitud=="" || longitud==""){
       getCellGPS(" AT+QCELLLOC", 100);
       Serial.println(latitud);
@@ -255,6 +286,7 @@ void printCalculatedAccels(){
     }
     conexion=0;
     Serial.println(post2);
+    digitalWrite(led2, LOW);
   }
 }
 
