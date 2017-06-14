@@ -75,7 +75,7 @@ if($result){
 }
 
 
-
+echo $status;
 
 printf("\n");
 $link->close();
