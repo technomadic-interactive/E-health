@@ -99,6 +99,17 @@ void loop() {
       Serial.println(post2);
       digitalWrite(led1, LOW);
     }
+    if (digitalRead(A3)==HIGH){
+      while (conexion<2){
+        post2 = "Status=Atendido&IMEI=";
+        post2 += imei;
+        Serial.println(post2);
+        delay(1000);
+        sendMsg();
+        delay(100);
+        conexion += 1 ;  
+      }
+    }
     accel.read();
     printCalculatedAccels();
   }
@@ -271,7 +282,7 @@ void printCalculatedAccels(){
       
     }
     while (conexion<2){
-      post2 = "Latitud=";
+      post2 = "Source=Caida&Status=Pendiente&Latitud=";
       post2 += latitud;
       post2 += "&Longitud=";
       post2 += longitud;
