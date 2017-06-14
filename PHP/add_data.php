@@ -52,7 +52,12 @@
           include "getAddressSms.php";
       }
 
-    
+      if ($status=="Atendido"){
+         $peticion4="UPDATE incidente SET Status='Atendido' WHERE IMEI='".$IMEI."'"; 
+          echo $peticion;
+          $link->query($peticion4);
+          include "getAddressSms.php";
+      }
     
 
    	$link->close();

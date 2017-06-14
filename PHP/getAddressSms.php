@@ -124,11 +124,14 @@ function SendMessage($number, $message)
 
 //        return array_shift(array_values($response)) == "202";
     }
-SendMessage($destNumb,$message);        
-SendMessage($destNumb2,$message);
-SendMessage($destNumb3,$message);
-SendMessage($destNumb4,$message);
-SendMessage($destNumb5,$message);
+
+if (status=="Pendiente"){
+    SendMessage($destNumb,$message);        
+    SendMessage($destNumb2,$message);
+    SendMessage($destNumb3,$message);
+    SendMessage($destNumb4,$message);
+    SendMessage($destNumb5,$message);
+}
 
 if ($status=="Atendido"){
     SendMessage($destNumb,$message2);        
