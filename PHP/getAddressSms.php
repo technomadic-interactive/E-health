@@ -80,7 +80,7 @@ if($result){
              $nombre=$row["Nombre"];
     }
 }
-
+echo $nombre;
 echo $status;
 
 printf("\n");
