@@ -45,15 +45,15 @@
           header("Location: /E-health/PHP/monitoreo.php"); 
       }
 
-      if ($latitud && status=="Pendiente"){
+      if ($latitud && status=='Pendiente'){
           $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."', '" .$source."', '" .$status."')"; 
           echo $peticion;
           $link->query($peticion3);
           include "getAddressSms.php";
       }
 
-      if ($status=="Atendido"){
-         $peticion4="UPDATE incidente SET Status='Atendido' WHERE IMEI='".$IMEI."'"; 
+      if ($status=='Atendido'){
+         $peticion4="UPDATE incidentes SET Status='Atendido' WHERE IMEI='".$IMEI."'"; 
           echo $peticion;
           $link->query($peticion4);
           include "getAddressSms.php";
