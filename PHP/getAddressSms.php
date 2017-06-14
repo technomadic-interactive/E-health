@@ -125,7 +125,7 @@ function SendMessage($number, $message)
 //        return array_shift(array_values($response)) == "202";
     }
 
-if (status=="Pendiente"){
+if ($status=="Pendiente"){
     SendMessage($destNumb,$message);        
     SendMessage($destNumb2,$message);
     SendMessage($destNumb3,$message);
