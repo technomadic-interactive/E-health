@@ -32,6 +32,7 @@
        $_SESSION['latitud']=$latitud;
        $_SESSION['longitud']=$longitud;
        $_SESSION['fix']=$fix;
+       $_SESSION['status']=$status;
        if ($nombre){
            $peticion="INSERT INTO datos VALUES (NULL, '" .$IMEI."', '" .$nombre."', '" .$apellido."',$year, $month, $day, '" .$direccion."','" .$telefono."', '" .$sexo."' )";        
            $link->query($peticion);

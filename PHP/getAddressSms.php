@@ -7,6 +7,7 @@ $IMEI=$_SESSION["IMEI"];
 $latitud=$_SESSION["latitud"];
 $longitud=$_SESSION["longitud"];
 $fix=$_SESSION["fix"];
+$status=$_SESSION['status'];
 
 
 $lat=(string) $latitud;
@@ -74,6 +75,8 @@ if($result){
 }
 
 
+
+
 printf("\n");
 $link->close();
 $destNumb=$res;
@@ -94,6 +97,7 @@ echo $destNumb5;
 //$destNumb="+17864540964";#números destino para recivir el sms de plivo
 printf("\n");
 $message=$myAddress."\r\n".$myAddress_short;#mensaje para el sms de plivo
+$message2="Tu familiar ha sido atendido";
 echo $message;
 printf("\n");
 
@@ -125,5 +129,13 @@ SendMessage($destNumb2,$message);
 SendMessage($destNumb3,$message);
 SendMessage($destNumb4,$message);
 SendMessage($destNumb5,$message);
+
+if ($status=="Atendido"){
+    SendMessage($destNumb,$message2);        
+    SendMessage($destNumb2,$message2);
+    SendMessage($destNumb3,$message2);
+    SendMessage($destNumb4,$message2);
+    SendMessage($destNumb5,$message2);
+}
 
 ?>
