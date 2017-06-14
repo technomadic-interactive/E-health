@@ -76,7 +76,7 @@ if($result){
 
 $result2= $link->query("SELECT Nombre FROM datos WHERE IMEI=".$IMEI."");
 if($result){
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $result2->fetch_assoc()) {
              $nombre=$row["Nombre"];
     }
 }
