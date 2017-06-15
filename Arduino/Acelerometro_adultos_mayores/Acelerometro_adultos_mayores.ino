@@ -109,6 +109,7 @@ void loop() {
         delay(100);
         conexion += 1 ;  
       }
+      conexion=0;
     }
     accel.read();
     printCalculatedAccels();
