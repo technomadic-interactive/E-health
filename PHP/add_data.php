@@ -49,7 +49,7 @@
           $peticion3="INSERT INTO incidentes VALUES (NULL, '" .$IMEI."', NULL, $latitud, $longitud, '" .$fix."', '" .$source."', '" .$status."')"; 
           echo $peticion;
           $link->query($peticion3);
-         /include "getAddressSms.php";
+          include "getAddressSms.php";
       }
 
       if ($status=='Atendido'){
