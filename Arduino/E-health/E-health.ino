@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 #include <SFE_MMA8452Q.h> // Includes the SFE_MMA8452Q library
+#include <Adafruit_GPS.h>
 
 MMA8452Q accel;
 
