@@ -7,7 +7,7 @@ $IMEI=$_SESSION["IMEI"];
 $latitud=$_SESSION["latitud"];
 $longitud=$_SESSION["longitud"];
 $fix=$_SESSION["fix"];
-$status=$_SESSION['status'];
+//$status=$_SESSION['status'];
 
 
 $lat=(string) $latitud;
