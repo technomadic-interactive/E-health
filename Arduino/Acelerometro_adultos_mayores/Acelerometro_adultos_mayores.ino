@@ -100,6 +100,7 @@ void loop() {
       digitalWrite(led1, LOW);
     }
     if (digitalRead(A3)==HIGH){
+      conexion=0;
       while (conexion<2){
         post2 = "Status=Atendido&IMEI=";
         post2 += imei;
