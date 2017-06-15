@@ -10,16 +10,35 @@ String latitud;
 String longitud;
 String post2;
 int conexion=0;
+int led1 = 7;
+int led2 = 8;
+int led3 = 9;
+
+SoftwareSerial Uc20(5,6); //rX, tX 
+SoftwareSerial mySerial(10,11);
+Adafruit_GPS GPS(&mySerial);
+#define GPSECHO  true
+boolean usingInterrupt = false;
+void useInterrupt(boolean);
 
 //Generacion de Objetos
 
-SoftwareSerial Uc20(5,6); //rX, tX 
 //Definicion de funciones
 void sendMsg();
 
 void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(A2, INPUT);
+  pinMode(4, OUTPUT);
+  digitalWrite(4, HIGH);
+  delay(500);
+  digitalWrite(4, LOW);
+  delay(10000);
   Wire.begin();
   Serial.begin(9600);
+  
   Uc20.begin(115200);
   delay(1000);
   sendATCommand("AT+IPR=9600", 100);
@@ -31,30 +50,79 @@ void setup() {
   accel.init(SCALE_4G); // Uncomment this out if you'd like
   
   sessionsInit();
+  while(imei==""){
+    char c;
+    imei;
+    Uc20.println(" AT+GSN");     // Send request
+    int count = 5;                       // Number of 100ms intervals before 
+                                         // assuming there is no more data
+    while(count-- != 0) {                // Loop until count = 0
 
-  char c;
-  imei;
-  Uc20.println(" AT+GSN");     // Send request
-  int count = 5;                       // Number of 100ms intervals before 
-                                       // assuming there is no more data
-  while(count-- != 0) {                // Loop until count = 0
+      delay(100);                        // Delay 100ms
 
-    delay(100);                        // Delay 100ms
-
-    while (Uc20.available() > 0){  // If there is data, read it and reset
-       c = (char)Uc20.read();      // the counter, otherwise go try again
-       imei += c;
-       count = 5;       
+      while (Uc20.available() > 0){  // If there is data, read it and reset
+         c = (char)Uc20.read();      // the counter, otherwise go try again
+         imei += c;
+         count = 5;       
+      }
     }
+    imei.remove(0, 9);
+    imei.remove(15, 8);
+    Serial.println(imei);
+    Serial.println(imei.length());
   }
-  imei.remove(0, 9);
-  imei.remove(15, 8);
-  Serial.println(imei);
-  Serial.println(imei.length());
+  while(latitud=="" || longitud=="" || latitud.length()!=9 || longitud.length()!=10){
+    getCellGPS(" AT+QCELLLOC", 100);
+    Serial.println(latitud);
+    Serial.println(latitud);
+    Serial.println(latitud.length());
+    Serial.println(longitud.length());
+  }
+
 }
 
 void loop() {
   if (accel.available()){
+    if (digitalRead(A2)==HIGH){
+      digitalWrite(led1, HIGH);
+      while(latitud=="" || longitud==""){
+        getCellGPS(" AT+QCELLLOC", 100);
+        Serial.println(latitud);
+        Serial.println(latitud);
+      }
+      while (conexion<2){
+        post2 = "Status=Pendiente&Source=Boton&Latitud=";
+        post2 += latitud;
+        post2 += "&Longitud=";
+        post2 += longitud;
+        post2 += "&IMEI=";
+        post2 += imei;
+        post2 += "&Fix=Celular";
+        Serial.println(post2);
+        delay(1000);
+        sendMsg();
+        delay(100);
+        conexion += 1 ;  
+      }
+      conexion=0;
+      Serial.println(post2);
+      digitalWrite(led1, LOW);
+    }
+    // if (digitalRead(A3)==HIGH){
+    //   conexion=0;
+    //   digitalWrite(led3, HIGH);
+    //   while (conexion<2){
+    //     post2 = "Status=Atendido&IMEI=";
+    //     post2 += imei;
+    //     Serial.println(post2);
+    //     delay(1000);
+    //     sendMsg();
+    //     delay(100);
+    //     conexion += 1 ;  
+    //   }
+    //   conexion=0;
+    //   digitalWrite(led3, LOW);
+    // }
     accel.read();
     printCalculatedAccels();
   }
@@ -110,6 +178,7 @@ String sendATCommand(String command, int ms) {
     }
   }
   Serial.println(res);
+  Serial.println(res.length());
   return res;
 }
 
@@ -216,11 +285,18 @@ void printCalculatedAccels(){
     Serial.print(accel.cz, 3);
     Serial.print("\t");
     Serial.println();
-    getCellGPS(" AT+QCELLLOC", 100);
-    Serial.println(latitud);
-    Serial.println(longitud);
+    //getCellGPS(" AT+QCELLLOC", 100);
+    //Serial.println(latitud);
+    //Serial.println(longitud);
+    digitalWrite(led2, HIGH);
+    while(latitud=="" || longitud==""){
+      getCellGPS(" AT+QCELLLOC", 100);
+      Serial.println(latitud);
+      Serial.println(latitud);
+      
+    }
     while (conexion<2){
-      post2 = "Latitud=";
+      post2 = "Source=Caida&Status=Pendiente&Latitud=";
       post2 += latitud;
       post2 += "&Longitud=";
       post2 += longitud;
@@ -235,6 +311,7 @@ void printCalculatedAccels(){
     }
     conexion=0;
     Serial.println(post2);
+    digitalWrite(led2, LOW);
   }
 }
 
