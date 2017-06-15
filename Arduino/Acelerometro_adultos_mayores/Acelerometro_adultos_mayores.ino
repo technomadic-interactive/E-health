@@ -11,7 +11,8 @@ String longitud;
 String post2;
 int conexion=0;
 int led1 = 7;
-int led 2 = 8;
+int led2 = 8;
+int led3 = 9;
 
 //Generacion de Objetos
 
@@ -22,6 +23,7 @@ void sendMsg();
 void setup() {
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
   pinMode(A2, INPUT);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
@@ -101,6 +103,7 @@ void loop() {
     }
     if (digitalRead(A3)==HIGH){
       conexion=0;
+      digitalWrite(led3, HIGH);
       while (conexion<2){
         post2 = "Status=Atendido&IMEI=";
         post2 += imei;
@@ -111,6 +114,7 @@ void loop() {
         conexion += 1 ;  
       }
       conexion=0;
+      digitalWrite(led3, LOW);
     }
     accel.read();
     printCalculatedAccels();
