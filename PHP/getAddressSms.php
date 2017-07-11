@@ -131,20 +131,20 @@ function SendMessage($number, $message)
 //        return array_shift(array_values($response)) == "202";
     }
 
-// if ($status=="Pendiente"){
-//     SendMessage($destNumb,$message);        
-//     SendMessage($destNumb2,$message);
-//     SendMessage($destNumb3,$message);
-//     SendMessage($destNumb4,$message);
-//     SendMessage($destNumb5,$message);
-// }
+if ($status=="Pendiente"){
+    SendMessage($destNumb,$message);        
+    SendMessage($destNumb2,$message);
+    SendMessage($destNumb3,$message);
+    SendMessage($destNumb4,$message);
+    SendMessage($destNumb5,$message);
+}
 
-// if ($status=="Atendido"){
-//     SendMessage($destNumb,$message2);        
-//     SendMessage($destNumb2,$message2);
-//     SendMessage($destNumb3,$message2);
-//     SendMessage($destNumb4,$message2);
-//     SendMessage($destNumb5,$message2);
-// }
+if ($status=="Atendido"){
+    SendMessage($destNumb,$message2);        
+    SendMessage($destNumb2,$message2);
+    SendMessage($destNumb3,$message2);
+    SendMessage($destNumb4,$message2);
+    SendMessage($destNumb5,$message2);
+}
 
 ?>
