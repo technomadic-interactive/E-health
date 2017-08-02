@@ -125,6 +125,7 @@ void loop() {
       for(int blinking=0: blinking<=5; blinking++){
         blink_verde();
       }
+      blink_flag=0;
     }
     accel.read();
     printCalculatedAccels();
