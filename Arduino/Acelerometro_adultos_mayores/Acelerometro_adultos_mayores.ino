@@ -13,6 +13,7 @@ int conexion=0;
 int led1 = 7;
 int led2 = 8;
 int led3 = 9;
+int blink_flag=0;
 
 //Generacion de Objetos
 
@@ -100,8 +101,14 @@ void loop() {
       conexion=0;
       Serial.println(post2);
       digitalWrite(led1, LOW);
+      while(digitalRead(A3)==LOW){
+        blink_rojo();
+        if(digitalRead(A3)==HIGH){
+          blink_flag=1;
+        }
+      }
     }
-    if (digitalRead(A3)==HIGH){
+    if (blink_flag==1){
       conexion=0;
       digitalWrite(led3, HIGH);
       while (conexion<2){
@@ -115,6 +122,9 @@ void loop() {
       }
       conexion=0;
       digitalWrite(led3, LOW);
+      for(int blinking=0: blinking<=5; blinking++){
+        blink_verde();
+      }
     }
     accel.read();
     printCalculatedAccels();
@@ -304,6 +314,12 @@ void printCalculatedAccels(){
     conexion=0;
     Serial.println(post2);
     digitalWrite(led2, LOW);
+    while (digitalRead(A3)==LOW){
+      blink_azul();
+      if(digitalRead(A3)==HIGH){
+        blink_flag=1;
+      }    
+    }
   }
 }
 
@@ -336,4 +352,25 @@ String getCellGPS(String command, int ms){
   Serial.println("================");
   Serial.println("================");
   return latitud, longitud;
+}
+
+void blink_rojo(){
+  digitalWrite(led1, HIGH);
+  delay(700);
+  digitalWrite(led1, LOW);
+  delay(700);
+}
+
+void blink_verde(){
+  digitalWrite(led2, HIGH);
+  delay(700);
+  digitalWrite(led2, LOW);
+  delay(700);
+}
+
+void blink_azul(){
+  digitalWrite(led3, HIGH);
+  delay(700);
+  digitalWrite(led3, LOW);
+  delay(700);
 }
