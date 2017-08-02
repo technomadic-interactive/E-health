@@ -364,9 +364,9 @@ void blink_rojo(){
 
 void blink_verde(){
   digitalWrite(led2, HIGH);
-  delay(700);
+  delay(200);
   digitalWrite(led2, LOW);
-  delay(700);
+  delay(200);
 }
 
 void blink_azul(){
