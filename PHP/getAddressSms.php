@@ -8,8 +8,7 @@ $latitud=$_SESSION["latitud"];
 $longitud=$_SESSION["longitud"];
 $fix=$_SESSION["fix"];
 //$status=$_SESSION['status'];
-
-
+$fecha=date("l d-m-Y h:i:s a");
 $lat=(string) $latitud;
 $long=(string) $longitud;
 
@@ -146,5 +145,16 @@ if ($status=="Atendido"){
     SendMessage($destNumb4,$message2);
     SendMessage($destNumb5,$message2);
 }
+
+$send_data -> fecha = $fecha;
+$send_data -> status = $status;
+$send_data -> latitud = $latitud;
+$send_data -> longitud = $longitud;
+
+$myJSON = json_encode($send_data);
+
+$archivo = fopen("data.json", "w");
+fwrite($archivo, $myJSON);
+fclose($archivo);
 
 ?>
