@@ -60,7 +60,7 @@ $replace=array(",","","");
 
 //$destNumb="+525554181711";
 
-include "../connect_e_health.php";
+//include "../connect_e_health.php";
 $link=db_Connection();
 $result= $link->query("SELECT Numero1, Numero2, Numero3, Numero4, Numero5 FROM contactos WHERE IMEI=".$IMEI."");
 if($result){
